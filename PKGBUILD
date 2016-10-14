@@ -73,7 +73,7 @@ build() {
   make
 }
 
-package_opencv() {
+package_opencv-cuda() {
   options=('staticlibs')
 
   cd "$srcdir/$pkgname-$pkgver"
@@ -95,7 +95,7 @@ package_opencv() {
   fi
 }
 
-package_opencv-samples() {
+package_opencv-cuda-samples() {
   pkgdesc+=" (samples)"
   depends=("opencv=$pkgver") # sample codes change with lib/API
   unset optdepends
