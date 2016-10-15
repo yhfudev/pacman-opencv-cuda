@@ -22,10 +22,14 @@ optdepends=('opencv-samples'
             'python2-numpy: Python 2 interface')
 source=("${_pkgbase}-${pkgver}.tar.gz::https://github.com/Itseez/opencv/archive/$pkgver.tar.gz"
         "opencv_contrib-${pkgver}.tar.gz::https://github.com/Itseez/opencv_contrib/archive/$pkgver.tar.gz"
-        '5852.patch')
+        '5852.patch'
+        'opencv-3.1.0-vtk-cmake.patch'
+    )
 md5sums=('6082ee2124d4066581a7386972bfd52a'
          'a822839ad3ab79ff837c16785ea9dd10'
-         '5bd9cd736b171c15cedee3a32a0c47ff')
+         '5bd9cd736b171c15cedee3a32a0c47ff'
+         'fc8237ef0558515ad98d0badef68338a'
+    )
 
 _cmakeopts=('-D WITH_OPENCL=ON'
             '-D WITH_OPENGL=ON'
@@ -62,6 +66,7 @@ _cmakeopts=('-D WITH_OPENCL=ON'
 prepare() {
   cd "$srcdir/${_pkgbase}-$pkgver"
   patch -p1 -i "$srcdir/5852.patch"
+  patch -p1 -i "$srcdir/opencv-3.1.0-vtk-cmake.patch"
 }
 
 build() {
