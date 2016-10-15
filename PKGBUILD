@@ -88,7 +88,7 @@ build() {
 package_opencv-cuda() {
   options=('staticlibs')
 
-  cd "$srcdir/${_pkgbase}-${pkgver}"
+  cd "$srcdir/${_pkgbase}-${pkgver}/build/"
 
   make DESTDIR="$pkgdir" install
 
