@@ -19,7 +19,7 @@ optdepends=('opencv-samples'
             'libcl: For coding with OpenCL'
             'python-numpy: Python 3 interface'
             'python2-numpy: Python 2 interface')
-source=("$pkgbase-$pkgver.tar.gz::https://github.com/Itseez/opencv/archive/$pkgver.zip"
+source=("opencv-$pkgver.tar.gz::https://github.com/Itseez/opencv/archive/$pkgver.zip"
         "opencv_contrib-$pkgver.tar.gz::https://github.com/Itseez/opencv_contrib/archive/$pkgver.tar.gz"
         '5852.patch')
 md5sums=('6082ee2124d4066581a7386972bfd52a'
