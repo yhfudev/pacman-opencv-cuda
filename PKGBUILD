@@ -13,8 +13,9 @@ license=('BSD')
 url="http://opencv.org/"
 depends=('intel-tbb' 'openexr' 'xine-lib' 'libdc1394' 'gtkglext'
     'nvidia-utils' 'hdf5-cpp-fortran' # The following variables are used in this project, but they are set to NOTFOUND : CUDA_CUDA_LIBRARY, HDF5_hdf5_cpp_LIBRARY
+    'protobuf'
   )
-makedepends=('cmake' 'python-numpy' 'python2-numpy' 'mesa' 'eigen' 'cuda' 'gcc5')
+makedepends=('cmake' 'python-numpy' 'python2-numpy' 'mesa' 'eigen' 'cuda')
 conflicts=('opencv' 'opencv-samples')
 provides=('opencv' 'opencv-samples')
 optdepends=('opencv-samples'
@@ -57,6 +58,7 @@ _cmakeopts=('-D WITH_OPENCL=ON'
             '-D WITH_CUBLAS=ON'
             '-D WITH_NVCUVID=ON'
             '-D CUDA_FAST_MATH=ON'
+            #'-D ENABLE_PRECOMPILED_HEADERS=OFF'
             )
 
 # SSE only available from Pentium 3 onwards (i686 is way older)
@@ -74,7 +76,7 @@ prepare() {
 build() {
   cd "$srcdir/${_pkgbase}-$pkgver"
 
-  cmake ${_cmakeopts[@]} \
+  cmake ${_cmakeopts[@]} -D CUDA_NVCC_FLAGS='-std=c++11 -Xcompiler -D__CORRECT_ISO_CPP11_MATH_H_PROTO' \
     -DOPENCV_EXTRA_MODULES_PATH="$srcdir/opencv_contrib-$pkgver/modules" \
     .
 
