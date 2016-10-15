@@ -58,7 +58,7 @@ _cmakeopts=('-D WITH_OPENCL=ON'
             '-D WITH_CUBLAS=ON'
             '-D WITH_NVCUVID=ON'
             '-D CUDA_FAST_MATH=ON'
-            #'-D ENABLE_PRECOMPILED_HEADERS=OFF'
+            '-D ENABLE_PRECOMPILED_HEADERS=OFF'
             )
 
 # SSE only available from Pentium 3 onwards (i686 is way older)
@@ -75,12 +75,14 @@ prepare() {
 
 build() {
   cd "$srcdir/${_pkgbase}-$pkgver"
+  mkdir -p build
+  cd build
 
   cmake ${_cmakeopts[@]} -D CUDA_NVCC_FLAGS='-std=c++11 -Xcompiler -D__CORRECT_ISO_CPP11_MATH_H_PROTO' \
     -DOPENCV_EXTRA_MODULES_PATH="$srcdir/opencv_contrib-$pkgver/modules" \
-    .
+    ..
 
-  make
+  make VERBOSE=1
 }
 
 package_opencv-cuda() {
