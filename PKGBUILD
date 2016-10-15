@@ -25,7 +25,7 @@ source=("${_pkgbase}-${pkgver}.tar.gz::https://github.com/Itseez/opencv/archive/
         '5852.patch'
         'opencv-3.1.0-vtk-cmake.patch'
     )
-md5sums=('6082ee2124d4066581a7386972bfd52a'
+md5sums=('70e1dd07f0aa06606f1bc0e3fa15abd3'
          'a822839ad3ab79ff837c16785ea9dd10'
          '5bd9cd736b171c15cedee3a32a0c47ff'
          'fc8237ef0558515ad98d0badef68338a'
