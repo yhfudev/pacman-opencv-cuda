@@ -12,9 +12,9 @@ arch=('i686' 'x86_64')
 license=('BSD')
 url="http://opencv.org/"
 depends=('intel-tbb' 'openexr' 'xine-lib' 'libdc1394' 'gtkglext'
-    'nvidia-utils' 'nvidia-libgl' hdf5-cpp-fortran # The following variables are used in this project, but they are set to NOTFOUND : CUDA_CUDA_LIBRARY, HDF5_hdf5_cpp_LIBRARY
+    'nvidia-utils' 'hdf5-cpp-fortran' # The following variables are used in this project, but they are set to NOTFOUND : CUDA_CUDA_LIBRARY, HDF5_hdf5_cpp_LIBRARY
   )
-makedepends=('cmake' 'python-numpy' 'python2-numpy' 'mesa' 'eigen' 'cuda')
+makedepends=('cmake' 'python-numpy' 'python2-numpy' 'mesa' 'eigen' 'cuda' 'gcc5')
 conflicts=('opencv' 'opencv-samples')
 provides=('opencv' 'opencv-samples')
 optdepends=('opencv-samples'
