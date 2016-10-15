@@ -60,12 +60,12 @@ _cmakeopts=('-D WITH_OPENCL=ON'
                '-D ENABLE_SSE3=OFF')
 
 prepare() {
-  cd "$srcdir/$pkgname-$pkgver"
+  cd "$srcdir/${_pkgbase}-$pkgver"
   patch -p1 -i "$srcdir/5852.patch"
 }
 
 build() {
-  cd "$srcdir/$pkgname-$pkgver"
+  cd "$srcdir/${_pkgbase}-$pkgver"
 
   cmake ${_cmakeopts[@]} \
     -DOPENCV_EXTRA_MODULES_PATH="$srcdir/opencv_contrib-$pkgver/modules" \
