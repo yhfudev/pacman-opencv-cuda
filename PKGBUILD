@@ -75,12 +75,10 @@ prepare() {
 
 build() {
   cd "$srcdir/${_pkgbase}-$pkgver"
-  mkdir -p build
-  cd build
 
   cmake ${_cmakeopts[@]} -D CUDA_NVCC_FLAGS='-std=c++11 -Xcompiler -D__CORRECT_ISO_CPP11_MATH_H_PROTO' \
     -DOPENCV_EXTRA_MODULES_PATH="$srcdir/opencv_contrib-$pkgver/modules" \
-    ..
+    .
 
   make VERBOSE=1
 }
@@ -88,7 +86,7 @@ build() {
 package_opencv-cuda() {
   options=('staticlibs')
 
-  cd "$srcdir/${_pkgbase}-${pkgver}/build/"
+  cd "$srcdir/${_pkgbase}-${pkgver}/"
 
   make DESTDIR="$pkgdir" install
 
