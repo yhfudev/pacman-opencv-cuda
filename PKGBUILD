@@ -3,6 +3,7 @@
 # Contributor: Tobias Powalowski <tpowa@archlinux.org>
 
 pkgbase=opencv-cuda
+_pkgbase=opencv
 pkgname=('opencv-cuda' 'opencv-cuda-samples')
 pkgver=3.1.0
 pkgrel=3
@@ -19,8 +20,8 @@ optdepends=('opencv-samples'
             'libcl: For coding with OpenCL'
             'python-numpy: Python 3 interface'
             'python2-numpy: Python 2 interface')
-source=("opencv-$pkgver.tar.gz::https://github.com/Itseez/opencv/archive/$pkgver.zip"
-        "opencv_contrib-$pkgver.tar.gz::https://github.com/Itseez/opencv_contrib/archive/$pkgver.tar.gz"
+source=("${_pkgbase}-${pkgver}.tar.gz::https://github.com/Itseez/opencv/archive/$pkgver.zip"
+        "opencv_contrib-${pkgver}.tar.gz::https://github.com/Itseez/opencv_contrib/archive/$pkgver.tar.gz"
         '5852.patch')
 md5sums=('6082ee2124d4066581a7386972bfd52a'
          'a822839ad3ab79ff837c16785ea9dd10'
@@ -76,20 +77,20 @@ build() {
 package_opencv-cuda() {
   options=('staticlibs')
 
-  cd "$srcdir/$pkgname-$pkgver"
+  cd "$srcdir/${_pkgbase}-${pkgver}"
 
   make DESTDIR="$pkgdir" install
 
   # install license file
-  install -Dm644 "$srcdir/$pkgname-$pkgver/LICENSE" \
+  install -Dm644 "$srcdir/${_pkgbase}-$pkgver/LICENSE" \
     "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 
   cd "$pkgdir/usr/share"
 
   # separate samples package; also be -R friendly
   if [[ -d OpenCV/samples ]]; then
-    mv OpenCV/samples "$srcdir/$pkgname-samples"
-    mv OpenCV $pkgname # otherwise folder naming is inconsistent
+    mv OpenCV/samples "$srcdir/${_pkgbase}-samples"
+    mv OpenCV ${_pkgbase} # otherwise folder naming is inconsistent
   elif [[ ! -d OpenCV ]]; then
     warning "Directory naming issue; samples package may not be built!"
   fi
@@ -104,7 +105,7 @@ package_opencv-cuda-samples() {
   cp -r "$srcdir/opencv-samples" "$pkgdir/usr/share/opencv/samples"
 
   # install license file
-  install -Dm644 "$srcdir/opencv-$pkgver/LICENSE" \
+  install -Dm644 "$srcdir/${_pkgbase}-$pkgver/LICENSE" \
     "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }
 
